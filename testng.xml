@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="YourTestSuite">
+    <test name="YourTest">
+        <classes>
+            <class name="com.bayt.testClasses.TaskTest">
+                <methods>
+                    <include name="applyForJobInMobileView">
+                        <parameter name="viewType" value="mobile"/>
+                    </include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
