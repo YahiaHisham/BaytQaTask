@@ -36,7 +36,7 @@ public class HomePage extends PageBase {
     }
 
     public HomePage clickOnAboutUsButton() {
-        clickOnElement(aboutUsButton);
+        forceClickUsingJavaScript(aboutUsButton);
         return this;
     }
 

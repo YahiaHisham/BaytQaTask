@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 
 public class PageBase {
     public WebDriver driver;
@@ -34,6 +35,14 @@ public class PageBase {
         waitUntilPresenceOfElement(elementLocator);
         scrollToElementView(elementLocator);
         driver.findElement(elementLocator).sendKeys(text);
+    }
+
+    public void selectByVisibleText(By dropdownLocator, String text) {
+        waitUntilPresenceOfElement(dropdownLocator);
+        scrollToElementView(dropdownLocator);
+        clickOnElement(dropdownLocator);
+        forceClickUsingJavaScript(By.xpath("//li[@data-text='" + text + "']"));
+//        forceClickUsingJavaScript(By.xpath("//a[text()='" + text + "']"));
     }
 
     public void setElementText(By elementLocator, int index, String text) {
@@ -124,5 +133,10 @@ public class PageBase {
         waitUntilPresenceOfElement(elementLocator);
         Select select = new Select(driver.findElement(elementLocator));
         select.selectByVisibleText(visibleText);
+    }
+
+    public void moveToTab(int tab) {
+        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(tab));
     }
 }
