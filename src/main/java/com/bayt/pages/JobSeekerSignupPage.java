@@ -7,12 +7,12 @@ import org.testng.Assert;
 
 public class JobSeekerSignupPage extends PageBase {
 
-    private By firstNameField = By.id("JsApplicantRegisterForm_firstName");
-    private By lastNameField = By.id("JsApplicantRegisterForm_lastName");
-    private By emailField = By.id("JsApplicantRegisterForm_email");
-    private By passwordField = By.id("JsApplicantRegisterForm_password");
-    private By mobileField = By.id("JsApplicantRegisterForm_mobPhone");
-    private By applyNowButton = By.id("register");
+    private final By firstNameField = By.id("JsApplicantRegisterForm_firstName");
+    private final By lastNameField = By.id("JsApplicantRegisterForm_lastName");
+    private final By emailField = By.id("JsApplicantRegisterForm_email");
+    private final By passwordField = By.id("JsApplicantRegisterForm_password");
+    private final By mobileField = By.id("JsApplicantRegisterForm_mobPhone");
+    private final By applyNowButton = By.id("register");
 
     public JobSeekerSignupPage(WebDriver driver) {
         super(driver);
@@ -42,14 +42,12 @@ public class JobSeekerSignupPage extends PageBase {
         return this;
     }
 
-    public JobSeekerSignupPage setMobileNumber(String mobileNumber) {
+    public void setMobileNumber(String mobileNumber) {
         setElementText(mobileField, mobileNumber);
-        return this;
     }
 
-    public JobSeekerSignupPage clickOnApplyNowButton() {
+    public void clickOnApplyNowButton() {
         clickOnElement(applyNowButton);
-        return this;
     }
 
 }

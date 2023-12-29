@@ -6,10 +6,10 @@ import org.openqa.selenium.WebDriver;
 
 public class HomePage extends PageBase {
 
-    private By searchBox = By.id("text_search");
-    private By findJobsButton = By.cssSelector("button.btn");
-    private By aboutUsButton = By.linkText("About Us");
-    private By countryDropdown = By.id("search_country__r");
+    private final By searchBox = By.id("text_search");
+    private final By findJobsButton = By.cssSelector("button.btn");
+    private final By aboutUsButton = By.linkText("About Us");
+    private final By countryDropdown = By.id("search_country__r");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -30,14 +30,12 @@ public class HomePage extends PageBase {
         return this;
     }
 
-    public HomePage clickOnFindJobsButton() {
+    public void clickOnFindJobsButton() {
         clickOnElement(findJobsButton);
-        return this;
     }
 
-    public HomePage clickOnAboutUsButton() {
+    public void clickOnAboutUsButton() {
         forceClickUsingJavaScript(aboutUsButton);
-        return this;
     }
 
 

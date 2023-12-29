@@ -12,54 +12,64 @@ import static com.bayt.utilities.Utilities.takeScreenshot;
 public class TaskTest extends TestBase {
 
     @Test
-    public void registerAndApplyForJob() throws InterruptedException {
-        updateValueInJsonFile("email", generateRandomText(9) + "@email.com", "LoginCredentials");
+    public void registerAndApplyForJob() {
+        updateValueInJsonFile("email", "Automation" + generateRandomText(5) + "@email.com", "LoginCredentials");
         updateValueInJsonFile("password", generateRandomText(4) + generateRandomNumbers(4), "LoginCredentials");
         String email = getValueFromJsonFile("email", "LoginCredentials");
         String password = getValueFromJsonFile("password", "LoginCredentials");
+        takeScreenshot(driver, "Register User Home Page");
         new HomePage(driver)
                 .clickOnAboutUsButton();
+        takeScreenshot(driver, "Register User About Us Page");
         new NavigationBarPage(driver)
                 .clickOnCareersButton();
+        takeScreenshot(driver, "Register User Careers Page");
         new BaytCareersPage(driver)
                 .assertThatUserRedirectedToBaytCareersPage(getValueFromJsonFile("BaytCareerPageUrl", "Validations"))
                 .clickOnOpenJobPost()
                 .moveToTab(1);
+        takeScreenshot(driver, "Register User Job Details Page");
         new JobPostDetailsPage(driver)
                 .clickOnEasyApplyButton();
+        takeScreenshot(driver, "Register User Job Seeker Page");
         new JobSeekerSignupPage(driver)
                 .setFirstName(generateRandomText(5))
                 .setLastName(generateRandomText(5))
                 .setEmail(email)
                 .setPassword(password)
-                .setMobileNumber("1"+generateRandomNumbers(9));
-//        Thread.sleep(20000);
+                .setMobileNumber("1" + generateRandomNumbers(9));
         new JobSeekerSignupPage(driver)
                 .clickOnApplyNowButton();
+        takeScreenshot(driver, "Register User Experience Page");
         new CompleteCvPage(driver)
                 .clickOnSkipButton()
-                .selectBirthdateDay("11")
-                .selectBirthdateMonth("August")
-                .selectBirthdateYear("1997")
+                .selectBirthdateDay()
+                .selectBirthdateMonth()
+                .selectBirthdateYear()
                 .selectMaleGender()
-                .selectNationality("Egypt")
+                .selectNationality()
                 .selectVisaStatus("Citizen")
                 .setJobTitle("Software Engineer")
                 .selectJobField("Quality Control")
-                .selectJobLocation("Egypt")
-                .selectJobStartDateMonth("March")
-                .selectJobStartDateYear("2020")
+                .selectJobLocation()
+                .selectJobStartDateMonth()
+                .selectJobStartDateYear()
                 .clickOnCurrentlyWorkHereButton()
                 .setCompanyName(generateRandomText(5))
-                .selectCompanyIndustry("Banking")
-                .selectEducationDegree("Bachelor's degree")
-                .setEducationUniversity("university")
-                .selectEducationCountry("Egypt")
-                .selectEducationCity("Cairo")
-                .setEducationMajor("major")
-                .selectGraduationMonth("May")
-                .selectGraduationYear("2005")
+                .selectCompanyIndustry("Advertising")
+                .selectEducationDegree("Higher diploma")
+                .setEducationUniversity("Harvard University")
+                .selectEducationCountry()
+                .selectEducationCity()
+                .setEducationMajor("Computer Science")
+                .selectGraduationMonth()
+                .selectGraduationYear()
                 .clickOnSaveButton();
+        new ApplicationStatusPage(driver)
+                .clickOnApplyNowButton();
+        new ApplicationStatusPage(driver)
+                .assertThatApplicationSentSuccessfully(getValueFromJsonFile("ApplicationStatus", "Validations"));
+        takeScreenshot(driver, "Register User Applications Status Page");
     }
 
     @Test

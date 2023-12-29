@@ -7,12 +7,13 @@ import org.openqa.selenium.WebDriver;
 public class JobSearchResultPage extends PageBase {
 
     By easyApplyButton = By.cssSelector("div.card a.is-small");
+
     public JobSearchResultPage(WebDriver driver) {
         super(driver);
     }
 
     public JobSearchResultPage clickOnEasyApplyButton() {
-        clickOnElement(easyApplyButton,0);
+        clickOnElement(easyApplyButton, 0);
         return this;
     }
 
