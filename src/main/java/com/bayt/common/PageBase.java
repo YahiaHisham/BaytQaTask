@@ -4,12 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 
 public class PageBase {
     public WebDriver driver;
@@ -36,19 +35,30 @@ public class PageBase {
         driver.findElement(elementLocator).sendKeys(text);
     }
 
-    public void setElementText(By elementLocator, int index, String text) {
-        waitUntilPresenceOfElement(elementLocator, index);
-        scrollToElementView(elementLocator, index);
-        driver.findElements(elementLocator).get(index).sendKeys(text);
+    public void selectByVisibleText(By dropdownLocator, By searchBoxLocator, String text) {
+        forceClickUsingJavaScript(dropdownLocator);
+        setElementText(searchBoxLocator, text);
+        forceClickUsingJavaScript(By.xpath("//li[@data-text='" + text + "']"));
     }
 
-    public void uploadFile(By elementLocator, String fileName) {
-        driver.findElement(elementLocator).sendKeys(System.getProperty("user.dir") + "/src/test/java/data" + fileName);
+    public void selectByOptionLocator(By dropdownLocator, By dropdownOptionLocator) {
+        clickOnElement(dropdownLocator);
+        forceClickUsingJavaScript(dropdownOptionLocator);
+    }
+
+    public String getElementText(By elementLocator) {
+        return driver.findElement(elementLocator).getText();
+    }
+
+    public void waitUntilRedirectionIsDone(String url) {
+        new WebDriverWait(driver, Duration.ofSeconds(20))
+                .until(ExpectedConditions.urlContains(url));
+
     }
 
     public void forceClickUsingJavaScript(By elementLocator) {
         waitUntilPresenceOfElement(elementLocator);
-        scrollToElementView(elementLocator);
+//        scrollToElementView(elementLocator);
         // Cast the WebDriver instance to JavascriptExecutor
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         // Replace 'element' with the actual WebElement you want to click
@@ -103,26 +113,8 @@ public class PageBase {
         ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, arguments[0]);", scrollPositionY);
     }
 
-    public void hoverOverElement(By elementLocator) {
-        waitUntilPresenceOfElement(elementLocator);
-        scrollToElementView(elementLocator);
-        Actions actions = new Actions(driver);
-        actions.moveToElement(driver.findElement(elementLocator)).build().perform();
-    }
-
-    public void hoverOverElement(By elementLocator, int index) {
-        waitUntilPresenceOfElement(elementLocator, index);
-        scrollToElementView(elementLocator, index);
-        Actions actions = new Actions(driver);
-        actions
-                .moveToElement(driver.findElements(elementLocator).get(index))
-                .build()
-                .perform();
-    }
-
-    public void selectElementByVisibleText(By elementLocator, String visibleText) {
-        waitUntilPresenceOfElement(elementLocator);
-        Select select = new Select(driver.findElement(elementLocator));
-        select.selectByVisibleText(visibleText);
+    public void moveToTab(int tab) {
+        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(tab));
     }
 }

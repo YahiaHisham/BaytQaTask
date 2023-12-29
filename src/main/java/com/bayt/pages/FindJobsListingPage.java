@@ -11,9 +11,8 @@ public class FindJobsListingPage extends PageBase {
         super(driver);
     }
 
-    public FindJobsListingPage clickOnEasyApplyButton() {
+    public void clickOnEasyApplyButton() {
         clickOnElement(easyApplyButton,0);
-        return this;
     }
 
 }
