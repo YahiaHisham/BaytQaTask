@@ -37,8 +37,7 @@ public class TaskTest extends TestBase {
                 .setLastName(generateRandomText(5))
                 .setEmail(email)
                 .setPassword(password)
-                .setMobileNumber("1" + generateRandomNumbers(9));
-        new JobSeekerSignupPage(driver)
+                .setMobileNumber("1" + generateRandomNumbers(9))
                 .clickOnApplyNowButton();
         takeScreenshot(driver, "Register User Experience Page");
         new CompleteCvPage(driver)
@@ -72,6 +71,25 @@ public class TaskTest extends TestBase {
         takeScreenshot(driver, "Register User Applications Status Page");
     }
 
+    @Test(dependsOnMethods = {"registerAndApplyForJob"})
+    public void loginAndDeleteAccount() {
+        takeScreenshot(driver, "Delete Account Login Page");
+        new LoginPage(driver)
+                .redirectToLoginPage(getValueFromJsonFile("LoginUrl", "Urls"))
+                .setEmail(getValueFromJsonFile("email", "LoginCredentials"))
+                .setPassword(getValueFromJsonFile("password", "LoginCredentials"))
+                .clickOnLoginButton();
+        takeScreenshot(driver, "Delete Account Dashboard Page");
+        new DashboardPage(driver)
+                .assertThatUserLoggedInSuccessfully(getValueFromJsonFile("LoggedInUserPageTitle", "Validations"))
+                .clickOnAccountSettingsButton();
+        takeScreenshot(driver, "Delete Account Account Setting Page");
+        new AccountSettingsPage(driver)
+                .deleteAccount()
+                .assertThatAccountIsDeleted(getValueFromJsonFile("HomePageTitle", "Validations"));
+        takeScreenshot(driver, "Delete Account Deleted Account Page");
+    }
+
     @Test
     public void applyForJobInMobileView() {
         takeScreenshot(driver, "mobile view home page");
@@ -85,6 +103,7 @@ public class TaskTest extends TestBase {
         takeScreenshot(driver, "mobile view job seeker page");
         new JobSeekerSignupPage(driver)
                 .assertThatJobSeekerSignupPageIsDisplayed(getValueFromJsonFile("SignupPageTitle", "Validations"));
+        takeScreenshot(driver, "mobile view job seeker page 2");
     }
 
 }

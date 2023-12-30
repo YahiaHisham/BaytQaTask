@@ -1,5 +1,7 @@
 {
   "SignupPageTitle": "Job Seeker Sign up - Bayt.com",
   "BaytCareerPageUrl": "https://www.bayt.com/en/company/bayt-com-1480348/",
-  "ApplicationStatus": "Your application has been sent"
+  "ApplicationStatus": "Your application has been sent",
+  "LoggedInUserPageTitle": "Dashboard - Bayt.com",
+  "HomePageTitle": "Egypt's Leading Job Site - Bayt.com"
 }

@@ -3,6 +3,7 @@ package com.bayt.utilities;
 import java.util.Random;
 
 public class Generators {
+
     public static String generateRandomText(int length) {
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         StringBuilder sb = new StringBuilder();

@@ -7,6 +7,8 @@
                     <include name="applyForJobInMobileView">
                         <parameter name="viewType" value="mobile"/>
                     </include>
+                    <include name="registerAndApplyForJob"/>
+                    <include name="loginAndDeleteAccount"/>
                 </methods>
             </class>
         </classes>
