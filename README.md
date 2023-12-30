@@ -27,7 +27,7 @@ Ensure you have the following software installed:
 2. Navigate to the project directory.
 3. Install project dependencies using Maven and reload your maven xml file.
 4. wait until all dependencies are resolved
-5. run the project
+5. run the project from testng.xml file
 
 ## Project Structure
 
