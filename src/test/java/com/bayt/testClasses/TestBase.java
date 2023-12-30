@@ -3,15 +3,14 @@ package com.bayt.testClasses;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
-import java.io.File;
 import java.time.Duration;
-import java.util.ArrayList;
 
 import static com.bayt.utilities.JsonReader.getValueFromJsonFile;
-import static com.bayt.utilities.Utilities.takeScreenshot;
 
 public class TestBase {
     public WebDriver driver;
@@ -20,7 +19,7 @@ public class TestBase {
     @Parameters("viewType")
     public void startBrowser(@Optional("web") String viewType) {
         driver = new ChromeDriver();
-        driver.get(getValueFromJsonFile("BaytUrl","Urls"));
+        driver.get(getValueFromJsonFile("BaytUrl", "Urls"));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         if ("mobile".equalsIgnoreCase(viewType)) {
             setMobileView();
@@ -40,6 +39,6 @@ public class TestBase {
 
     @AfterMethod
     public void tearDown() {
-//        driver.quit();
+        driver.quit();
     }
 }

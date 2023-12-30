@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.devtools.v85.page.Page;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -11,16 +12,18 @@ import java.time.Duration;
 import java.util.ArrayList;
 
 public class PageBase {
+
     public WebDriver driver;
 
     public PageBase(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void clickOnElement(By elementLocator) {
+    public PageBase clickOnElement(By elementLocator) {
         waitUntilPresenceOfElement(elementLocator);
         scrollToElementView(elementLocator);
         driver.findElement(elementLocator).click();
+        return this;
     }
 
     public void clickOnElement(By elementLocator, int index) {
@@ -56,25 +59,20 @@ public class PageBase {
 
     }
 
-    public void forceClickUsingJavaScript(By elementLocator) {
+    public PageBase forceClickUsingJavaScript(By elementLocator) {
         waitUntilPresenceOfElement(elementLocator);
-//        scrollToElementView(elementLocator);
-        // Cast the WebDriver instance to JavascriptExecutor
+        scrollToElementView(elementLocator);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        // Replace 'element' with the actual WebElement you want to click
         WebElement element = driver.findElement(elementLocator);
-        // Use JavaScript to force the click
         jsExecutor.executeScript("arguments[0].click();", element);
+        return this;
     }
 
     public void forceClickUsingJavaScript(By elementLocator, int index) {
         waitUntilPresenceOfElement(elementLocator, index);
         scrollToElementView(elementLocator, index);
-        // Cast the WebDriver instance to JavascriptExecutor
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        // Replace 'element' with the actual WebElement you want to click
         WebElement element = driver.findElements(elementLocator).get(index);
-        // Use JavaScript to force the click
         jsExecutor.executeScript("arguments[0].click();", element);
     }
 
@@ -97,7 +95,6 @@ public class PageBase {
 
     public void scrollToElementView(By elementLocator) {
         WebElement element = driver.findElement(elementLocator);
-//        to scroll until the element view is in the middle of the screen
         int elementPositionY = element.getLocation().getY();
         int viewportHeight = ((Long) ((JavascriptExecutor) driver).executeScript("return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;")).intValue();
         int scrollPositionY = elementPositionY - (viewportHeight / 2);
@@ -106,7 +103,6 @@ public class PageBase {
 
     public void scrollToElementView(By elementLocator, int index) {
         WebElement element = driver.findElements(elementLocator).get(index);
-//        to scroll until the element view is in the middle of the screen
         int elementPositionY = element.getLocation().getY();
         int viewportHeight = ((Long) ((JavascriptExecutor) driver).executeScript("return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;")).intValue();
         int scrollPositionY = elementPositionY - (viewportHeight / 2);

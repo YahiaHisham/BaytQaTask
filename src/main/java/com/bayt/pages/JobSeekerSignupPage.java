@@ -42,8 +42,9 @@ public class JobSeekerSignupPage extends PageBase {
         return this;
     }
 
-    public void setMobileNumber(String mobileNumber) {
+    public JobSeekerSignupPage setMobileNumber(String mobileNumber) {
         setElementText(mobileField, mobileNumber);
+        return this;
     }
 
     public void clickOnApplyNowButton() {

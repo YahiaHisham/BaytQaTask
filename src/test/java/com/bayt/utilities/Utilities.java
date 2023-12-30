@@ -17,7 +17,7 @@ public class Utilities {
 
     public static void takeScreenshot(WebDriver driver, String imageName) {
         new WebDriverWait(driver, Duration.ofSeconds(10))
-        .until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete'"));
+                .until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete'"));
         try {
             File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(screenshotFile, new File(screenshotLocation + imageName + ".png"));
