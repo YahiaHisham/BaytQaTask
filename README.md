@@ -11,6 +11,8 @@ it includes 3 test cases
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
+- [Part Four Test Cases](https://docs.google.com/spreadsheets/d/1ti1Yi7_q0PqHT8BHjYSh0joAA0WFgjBDzJPr_nG1GU4/edit?usp=sharing)
+- [Part Five Test Cases](https://docs.google.com/spreadsheets/d/1DnuX8p15cWeyzFIZDOai6C4oOo9kkHL1Ac4UGeuBulQ/edit?usp=sharing)
 
 
 ## Prerequisites
